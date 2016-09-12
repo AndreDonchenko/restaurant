@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+
+       default-autowire="byName">
+
+    <bean id="employeeDao" class="ua.goit.andre.ee9.dao.HEmployeeDao"/>
+    <bean id="positionDao" class="ua.goit.andre.ee9.dao.HPositionDao"/>
+    <bean id="dishDao" class="ua.goit.andre.ee9.dao.HDishDao"/>
+    <bean id="orderDao" class="ua.goit.andre.ee9.dao.HOrderDao"/>
+    <bean id="orderDetailDao" class="ua.goit.andre.ee9.dao.HOrderDetailDao"/>
+    <bean id="menuDao" class="ua.goit.andre.ee9.dao.HMenuDao"/>
+    <bean id="preparedDishDao" class="ua.goit.andre.ee9.dao.HPreparedDishDao"/>
+    <bean id="categoryDishDao" class="ua.goit.andre.ee9.dao.HCategoryDishDao"/>
+    <bean id="ingredientDao" class="ua.goit.andre.ee9.dao.HIngredientDao"/>
+    <bean id="recipeDao" class="ua.goit.andre.ee9.dao.HRecipeDao"/>
+    <bean id="stockDao" class="ua.goit.andre.ee9.dao.HStockDao"/>
+
+    <bean id="employeeController" class="ua.goit.andre.ee9.web.EmployeeController"/>
+    <bean id="positionController" class="ua.goit.andre.ee9.web.PositionController"/>
+    <bean id="dishController" class="ua.goit.andre.ee9.web.DishController"/>
+    <bean id="orderController" class="ua.goit.andre.ee9.web.OrderController"/>
+    <bean id="ingredientController" class="ua.goit.andre.ee9.web.IngredientController"/>
+    <bean id="stockController" class="ua.goit.andre.ee9.web.StockController"/>
+    <bean id="menuController" class="ua.goit.andre.ee9.web.MenuController"/>
+    <bean id="mainController" class="ua.goit.andre.ee9.web.MainController"/>
+    <bean id="categoryController" class="ua.goit.andre.ee9.web.CategoryController"/>
+
+    <bean id="employeeService" class="ua.goit.andre.ee9.service.EmployeeService"/>
+    <bean id="dishService" class="ua.goit.andre.ee9.service.DishService"/>
+    <bean id="orderService" class="ua.goit.andre.ee9.service.OrderService"/>
+    <bean id="ingredientService" class="ua.goit.andre.ee9.service.IngredientService"/>
+    <bean id="stockService" class="ua.goit.andre.ee9.service.StockService"/>
+    <bean id="menuService" class="ua.goit.andre.ee9.service.MenuService"/>
+
+</beans>
