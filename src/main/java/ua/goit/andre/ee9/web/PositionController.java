@@ -33,7 +33,7 @@ public class PositionController {
 
     @RequestMapping(value = "admin/positions/delete/{positionName}", method = RequestMethod.GET)
     public void positionsDelete(@PathVariable(value = "positionName") String positionName,
-                                HttpServletRequest request, HttpServletResponse response) {
+                                HttpServletResponse response) {
         try {
             Position position = new Position(positionName);
             employeeService.delPosition(position);

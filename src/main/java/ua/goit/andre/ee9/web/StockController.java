@@ -56,7 +56,7 @@ public class StockController {
 
     @RequestMapping(value = "admin/stock/addIngredient", method = RequestMethod.POST)
     public void addIngredient(String ingredientName, Double qty,
-                              HttpServletRequest request, HttpServletResponse response ) {
+                              HttpServletResponse response ) {
         Ingredient ingredient = ingredientService.getByName(ingredientName);
         if (qty >= 0 && null != ingredient) {
             stockService.addIngredient(ingredient, qty);
@@ -67,7 +67,7 @@ public class StockController {
 
     @RequestMapping(value = "admin/stock/delIngredient/{ingredientName}", method = RequestMethod.GET)
     public void positionsDelete(@PathVariable(value = "ingredientName") String ingredientName,
-                                HttpServletRequest request, HttpServletResponse response) {
+                                HttpServletResponse response) {
         List<Stock> stockList = stockService.getByName(ingredientName);
         for(Stock stock : stockList) {
             if (stock.getQty() == 0) {
