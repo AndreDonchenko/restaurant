@@ -5,6 +5,6 @@
 <jsp:include page="header.jsp"/>
 <body>
     <h3>Схема ресторана</h3>
-    <img src="/resources/karta_0.png">
+    <img src="resources/karta_0.png">
 </body>
 </html>

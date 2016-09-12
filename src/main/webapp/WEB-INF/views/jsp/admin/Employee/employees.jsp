@@ -15,7 +15,7 @@
     function delEmployee(employeeId) {
         if (confirm("Delete employee?") == true) {
             var xhttp = new XMLHttpRequest();
-            xhttp.open("GET", "/admin/employee/delete/" + employeeId, false);
+            xhttp.open("GET", "${pageContext.request.contextPath}/admin/employee/delete/" + employeeId, false);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("");
             if (xhttp.status == 400) {
@@ -28,7 +28,7 @@
     }
 </script>
 
-<a href="/admin/employee/add">Add Employee</a>
+<a href="${pageContext.request.contextPath}/admin/employee/add">Add Employee</a>
 <br/>
 <table class="table table-striped">
     <tr>
@@ -43,7 +43,7 @@
             <td>${employee.surname}</td>
             <td>${employee.position}</td>
             <td>
-                <button class="btn btn-primary" onclick="location.href='/admin/employee/${employee.id}'">Edit</button>
+                <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/employee/${employee.id}'">Edit</button>
                 <button class="btn btn-danger" onclick="delEmployee(${employee.id})">Delete</button>
             </td>
         </tr>

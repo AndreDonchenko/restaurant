@@ -16,7 +16,7 @@
     function delDish(dishId) {
         if (confirm("Delete dish?") == true) {
             var xhttp = new XMLHttpRequest();
-            xhttp.open("GET", "/admin/dish/delete/" + dishId, false);
+            xhttp.open("GET", "${pageContext.request.contextPath}/admin/dish/delete/" + dishId, false);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("");
             if (xhttp.status == 400) {
@@ -32,7 +32,7 @@
 <h3>Add dish</h3>
 <script>
     function reloadPhoto() {
-        document.getElementById('photo').src = "/resources/dish/" + document.getElementById('photoFn').value;
+        document.getElementById('photo').src = "${pageContext.request.contextPath}/resources/dish/" + document.getElementById('photoFn').value;
     }
 </script>
 <form:form action="/admin/dish" commandName="dish" method="post">
@@ -56,13 +56,13 @@
     &emsp;
     <input type="number" name="weight" id="weight" required value=${dish.weight}>
     &emsp;
-    <a href="/admin/dish/categories">Category:</a>
+    <a href="${pageContext.request.contextPath}/admin/dish/categories">Category:</a>
     <form:select path="categoryDish">
         <form:option value="NONE" label="--- Select ---" />
         <form:options items="${categoryList}" />
     </form:select>
     &emsp;
-    <img name="photo" id="photo" src="/resources/dish/${dish.photoFn}" height="120">
+    <img name="photo" id="photo" src="${pageContext.request.contextPath}/resources/dish/${dish.photoFn}" height="120">
     <br>
     <input type="submit" value="Add Dish">
 </form:form>
@@ -77,12 +77,12 @@
     </tr>
     <c:forEach var="dish" items="${dishes}">
         <tr>
-            <td><a href="/admin/dish/${dish.id}">${dish.dishName}</a></td>
+            <td><a href="${pageContext.request.contextPath}/admin/dish/${dish.id}">${dish.dishName}</a></td>
             <td>${dish.categoryDish}</td>
             <td>${dish.price}</td>
             <td>${dish.weight}</td>
             <td>
-                <button class="btn btn-primary" onclick="location.href='/admin/dish/${dish.id}'">Edit</button>
+                <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/dish/${dish.id}'">Edit</button>
                 <button class="btn btn-danger" onclick="delDish('${dish.id}')">Delete</button>
             </td>
         </tr>

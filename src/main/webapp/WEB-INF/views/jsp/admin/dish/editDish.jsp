@@ -21,7 +21,7 @@
         if (qty > 0) {
             ingredientName = document.getElementById('ingredient').value;
             var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "/admin/dish/edit/addIngredient", false);
+            xhttp.open("POST", "${pageContext.request.contextPath}/admin/dish/edit/addIngredient", false);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("dishId=" + dishId + "&ingredientName=" + ingredientName + "&qty=" + qty);
             if (xhttp.status == 400) {
@@ -37,7 +37,7 @@
     function delIngredientFromDish(recipeId) {
         if (confirm("Delete ingredient from dish?") == true) {
             var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "/admin/dish/edit/deleteIngedient/" + recipeId, false);
+            xhttp.open("POST", "${pageContext.request.contextPath}/admin/dish/edit/deleteIngedient/" + recipeId, false);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("");
             location.reload();
@@ -49,10 +49,10 @@
 <h3>Edit dish</h3>
 <script>
     function reloadPhoto() {
-        document.getElementById('photo').src = "/resources/dish/" + document.getElementById('photoFn').value;
+        document.getElementById('photo').src = "${pageContext.request.contextPath}/resources/dish/" + document.getElementById('photoFn').value;
     }
 </script>
-<form:form action="/admin/dish" commandName="dish" method="post">
+<form:form action="${pageContext.request.contextPath}/admin/dish" commandName="dish" method="post">
     <input type="hidden" name="id" id="id" value=${dish.id}>
 
     <label for="dishName">Dish:</label>
@@ -73,20 +73,20 @@
     &emsp;
     <input type="number" name="weight" id="weight" required value=${dish.weight}>
     &emsp;
-    <a href="/admin/dish/categories">Category:</a>
+    <a href="${pageContext.request.contextPath}/admin/dish/categories">Category:</a>
     <form:select path="categoryDish">
         <form:option value="NONE" label="--- Select ---" />
         <form:options items="${categoryList}" />
     </form:select>
     &emsp;
-    <img name="photo" id="photo" src="/resources/dish/${dish.photoFn}" height="120">
+    <img name="photo" id="photo" src="${pageContext.request.contextPath}/resources/dish/${dish.photoFn}" height="120">
     <br>
     <input type="submit" value="Update">
 </form:form>
 
     <hr>
     <h3>Add ingredient to dish</h3>
-    <a href="/admin/dish/ingredient">Ingredient:</a>
+    <a href="${pageContext.request.contextPath}/admin/dish/ingredient">Ingredient:</a>
     <select id="ingredient" name="ingredient" required>
         <c:forEach var="list" items="${ingredientList}">
             <option value='${list.ingredientName}'>${list.ingredientName}</option>

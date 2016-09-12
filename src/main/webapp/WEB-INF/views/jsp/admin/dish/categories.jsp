@@ -15,7 +15,7 @@
     function delCategory(categoryName) {
         if (confirm("Delete category?") == true) {
             var xhttp = new XMLHttpRequest();
-            xhttp.open("GET", "/admin/dish/categories/delete/" + categoryName, false);
+            xhttp.open("GET", "${pageContext.request.contextPath}/admin/dish/categories/delete/" + categoryName, false);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("");
             if (xhttp.status == 400) {
@@ -29,7 +29,7 @@
 </script>
 
     <h3>Add Category</h3>
-    <form action="categories" method="post">
+    <form action="${pageContext.request.contextPath}/admin/dish/categories" method="post">
         <input type="text" name="categoryName" id="categoryName" required value=${categoryName}>
         <input type="submit" value="Add Category">
     </form>

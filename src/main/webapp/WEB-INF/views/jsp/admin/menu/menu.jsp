@@ -12,7 +12,7 @@
 <body>
 
     <h3>Add new menu</h3>
-    <form action="menu" method="post">
+    <form action="${pageContext.request.contextPath}/admin/menu" method="post">
         <input type="text" name="menuName" id="menuName" required value=${menuName}>
         <input type="submit" value="Add Menu">
     </form>
@@ -27,13 +27,12 @@
             <tr>
                 <td>${menuItem.menuName}</td>
                 <td>
-                    <button class="btn btn-primary" onclick="location.href='/admin/menu/edit/${menuItem.id}'">Edit</button>
-                    <button class="btn btn-danger" onclick="location.href='/admin/menu/delete/${menuItem.id}'">Delete</button>
+                    <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/menu/edit/${menuItem.id}'">Edit</button>
+                    <button class="btn btn-danger" onclick="location.href='${pageContext.request.contextPath}/admin/menu/delete/${menuItem.id}'">Delete</button>
                 </td>
             </tr>
         </c:forEach>
     </table>
-
 
 </body>
 </html>

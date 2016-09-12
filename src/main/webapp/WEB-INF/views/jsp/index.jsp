@@ -1,4 +1,3 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -39,10 +38,7 @@
     <p>г.Киев, проспект академика Палладина 46 В (Пересечение проспекта академика Палладина и ул. Плодовая)</p>
     <p>Телефон для информации и заказа столов и банкетов (096) 404-3004</p>
     <p>email:<a href="mailto:info@korchma.tk">info@korchma.tk</a></p>
-<%--
-    <label for="filter">Найти блюдо по названию:</label>
-    <input type="text" name="filter" id="filter" onchange="applyFilter()">
---%>
+
     <table class="table table-striped">
         <tr>
             <th>Меню</th>

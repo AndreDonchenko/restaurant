@@ -14,7 +14,7 @@
     function delPosition(positionName) {
         if (confirm("Delete position?") == true) {
             var xhttp = new XMLHttpRequest();
-            xhttp.open("GET", "/admin/positions/delete/" + positionName, false);
+            xhttp.open("GET", "${pageContext.request.contextPath}/admin/positions/delete/" + positionName, false);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("");
             if (xhttp.status == 400) {
@@ -28,7 +28,7 @@
 </script>
 
 
-<form action="/admin/positions" method="post">
+<form action="${pageContext.request.contextPath}/admin/positions" method="post">
     <input type="text" name="positionName" id="positionName" required value=${positionName}>
     <input type="submit" value="Add Position">
 </form>

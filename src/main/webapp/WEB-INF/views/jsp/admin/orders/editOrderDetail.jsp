@@ -22,7 +22,7 @@
             alert ("Quntity must be > 0")
         } else {
             var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "/admin/orders/addDetail/", false);
+            xhttp.open("POST", "${pageContext.request.contextPath}/admin/orders/addDetail/", false);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send( "orderId=" + orderId +
                     "&dishId=" + dishId +
@@ -34,7 +34,7 @@
     function delOrderDetail(orderDetailId) {
         if (window.confirm("Delete dish from order?")) {
             var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "/admin/orders/deleteDetail/" + orderDetailId, false);
+            xhttp.open("POST", "${pageContext.request.contextPath}/admin/orders/deleteDetail/" + orderDetailId, false);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("");
         }
@@ -46,7 +46,7 @@
         dateOrder = document.getElementById('dateOrder').value;
         coockerId = document.getElementById('coockerId').value;
         var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "/admin/dish/prepareDish", false);
+        xhttp.open("POST", "${pageContext.request.contextPath}/admin/dish/prepareDish", false);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("dishId=" + dishId +
                 "&employeeId=" + coockerId +
@@ -95,7 +95,7 @@
         </tr>
         <c:forEach var="orderDetail" items="${orderNum.orderDetails}">
             <tr>
-                <td><a href="/admin/dish/${orderDetail.dish.id}">${orderDetail.dish}</a></td>
+                <td><a href="${pageContext.request.contextPath}/admin/dish/${orderDetail.dish.id}">${orderDetail.dish}</a></td>
                 <td>${orderDetail.qty}</td>
                 <td>
                     <button class="btn btn-primary" onclick="prepareDish(${orderDetail.dish.id})">Prepare</button>

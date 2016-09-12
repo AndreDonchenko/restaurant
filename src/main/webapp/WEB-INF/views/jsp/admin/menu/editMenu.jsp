@@ -17,7 +17,7 @@
     function addDishToMenu(menuId) {
         dishId = document.getElementById('dishId').value;
         var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "/admin/menu/addDish", false);
+        xhttp.open("POST", "${pageContext.request.contextPath}/admin/menu/addDish", false);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("menuId=" + menuId + "&dishId=" + dishId);
         location.reload();
@@ -27,7 +27,7 @@
         if (window.confirm("Delete Dish From Menu?")) {
             menuId = document.getElementById('id').value;
             var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "/admin/menu/delDish" , false);
+            xhttp.open("POST", "${pageContext.request.contextPath}/admin/menu/delDish" , false);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("menuId=" + menuId + "&dishId=" + dishId);
             location.reload();
@@ -38,7 +38,7 @@
         menuId = document.getElementById('id').value;
         menuName = document.getElementById('menuName').value;
         var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "/admin/menu/update", false);
+        xhttp.open("POST", "${pageContext.request.contextPath}/admin/menu/update", false);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("menuId=" + menuId + "&menuName=" + menuName);
         location.reload();

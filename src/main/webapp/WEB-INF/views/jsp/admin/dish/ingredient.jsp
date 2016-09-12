@@ -17,7 +17,7 @@
     function addIngredient() {
         ingredientName = document.getElementById('ingredient').value;
         var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "/admin/dish/ingredient", false);
+        xhttp.open("POST", "${pageContext.request.contextPath}/admin/dish/ingredient", false);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("ingredientName=" + ingredientName);
         location.reload();
@@ -26,7 +26,7 @@
     function delIngredient(ingredientName) {
         if (confirm("Delete ingredient?") == true) {
             var xhttp = new XMLHttpRequest();
-            xhttp.open("GET", "/admin/dish/ingredient/delete/" + ingredientName, false);
+            xhttp.open("GET", "${pageContext.request.contextPath}/admin/dish/ingredient/delete/" + ingredientName, false);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("");
             if (xhttp.status == 400) {

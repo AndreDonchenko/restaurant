@@ -11,25 +11,25 @@
 <jsp:include page="header.jsp"/>
 <body>
     <h1>Restaurant. Now: ${currentTime} </h1>
-    <a href="admin/menu">Menus</a>
+    <a href="${pageContext.request.contextPath}/admin/menu">Menus</a>
     <br>
     <hr>
-    <a href="admin/dish">Dishes</a>
+    <a href="${pageContext.request.contextPath}/admin/dish">Dishes</a>
     <br>
-    <a href="admin/dish/categories">Categories of dishes</a>
-    <br>
-    <hr>
-    <a href="/admin/employees">Employees</a>
-    <br>
-    <a href="/admin/positions">Positions</a>
-    <hr>
-    <br>
-    <a href="admin/stock">Stock</a>
-    <br>
-    <a href="admin/dish/ingredient">Ingredients</a>
+    <a href="${pageContext.request.contextPath}/admin/dish/categories">Categories of dishes</a>
     <br>
     <hr>
-    <a href="admin/orders">Orders</a>
+    <a href="${pageContext.request.contextPath}/admin/employees">Employees</a>
+    <br>
+    <a href="${pageContext.request.contextPath}/admin/positions">Positions</a>
+    <hr>
+    <br>
+    <a href="${pageContext.request.contextPath}/admin/stock">Stock</a>
+    <br>
+    <a href="${pageContext.request.contextPath}/admin/dish/ingredient">Ingredients</a>
+    <br>
+    <hr>
+    <a href="${pageContext.request.contextPath}/admin/orders">Orders</a>
     <br>
 </body>
 </html>

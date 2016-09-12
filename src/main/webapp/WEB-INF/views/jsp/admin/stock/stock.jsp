@@ -38,7 +38,7 @@
         if (qty >= 0) {
             ingredientName = document.getElementById('ingredient').value;
             var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "/admin/stock/addIngredient", false);
+            xhttp.open("POST", "${pageContext.request.contextPath}/admin/stock/addIngredient", false);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("ingredientName=" + ingredientName + "&qty=" + qty);
             if (xhttp.status == 400) {
@@ -54,7 +54,7 @@
     function delIngredientFromStock(ingredientName) {
         if (confirm("Delete ingredient from dish?") == true) {
             var xhttp = new XMLHttpRequest();
-            xhttp.open("GET", "/admin/stock/delIngredient/" + ingredientName, false);
+            xhttp.open("GET", "${pageContext.request.contextPath}/admin/stock/delIngredient/" + ingredientName, false);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("");
             if (xhttp.status == 400) {
@@ -70,7 +70,7 @@
         qty = prompt("Enter new Qty:");
         if ( qty >= 0 ) {
             var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "/admin/stock/addIngredient", false);
+            xhttp.open("POST", "${pageContext.request.contextPath}/admin/stock/addIngredient", false);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("ingredientName=" + ingredientName + "&qty=" + qty);
             if (xhttp.status == 400) {
@@ -94,7 +94,7 @@
 </script>
 
     <h3>Add Ingredient to Stock</h3>
-    <a href="/admin/dish/ingredient">Ingredient:</a>
+    <a href="${pageContext.request.contextPath}/admin/dish/ingredient">Ingredient:</a>
     <select id="ingredient" name="ingredient">
         <c:forEach var="list" items="${emptyIngredients}">
             <option value="${list.toString()}">${list.toString()}</option>

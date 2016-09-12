@@ -59,7 +59,7 @@
         tableNum = document.getElementById('tableNum').value;
         isOpen = document.getElementById('open').checked;
         var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "/admin/orders", false);
+        xhttp.open("POST", "${pageContext.request.contextPath}/admin/orders", false);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send( "employeeId=" + employeeId +
                     "&dateOrder=" + dateOrder +
@@ -71,7 +71,7 @@
     function delOrder(orderId) {
         if (confirm("Delete order?") == true) {
             var xhttp = new XMLHttpRequest();
-            xhttp.open("GET", "/admin/orders/delete/" + orderId, false);
+            xhttp.open("GET", "${pageContext.request.contextPath}/admin/orders/delete/" + orderId, false);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("");
             if (xhttp.status == 400) {
@@ -119,7 +119,7 @@
             <td>${order.tableNum}</td>
             <td>${order.open}</td>
             <td>
-                <button class="btn btn-primary" onclick="location.href='/admin/orders/editDetail/${order.id}'">Edit</button>
+                <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/admin/orders/editDetail/${order.id}'">Edit</button>
                 <button class="btn btn-danger" onclick="delOrder('${order.id}')">Delete</button>
             </td>
         </tr>

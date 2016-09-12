@@ -14,11 +14,11 @@
 <body>
 <script>
     function reloadPhoto() {
-        document.getElementById('photo').src = "/resources/employee/" + document.getElementById('photoFn').value;
+        document.getElementById('photo').src = "${pageContext.request.contextPath}/resources/employee/" + document.getElementById('photoFn').value;
     }
 </script>
 <h3>Edit Employee</h3>
-<form:form action="/admin/employees" commandName="employee" method="post">
+<form:form action="${pageContext.request.contextPath}/admin/employees" commandName="employee" method="post">
     <input type="hidden" name="id" id="id" value=${employee.id}>
 
     <label for="name">First Name:</label>
@@ -36,9 +36,8 @@
     <label for="salary">Salary:</label>
     <input type="number" name="salary" id="salary" required value=${employee.salary}>
     <br>
-    <a href="/admin/positions">Position:</a>
+    <a href="${pageContext.request.contextPath}/admin/positions">Position:</a>
     <form:select path="position">
-        <%--<form:option value="NONE" label="--- Select ---" />--%>
         <form:options items="${positionList}" />
     </form:select>
     <br>
@@ -48,7 +47,7 @@
         <form:options items="${photoFiles}" />
     </form:select>
     <br>
-    <img name="photo" id="photo" src="/resources/employee/${employee.photoFn}" height="120">
+    <img name="photo" id="photo" src="${pageContext.request.contextPath}/resources/employee/${employee.photoFn}" height="120">
     <br>
     <input type="submit" value="Submit">
     </form:form>

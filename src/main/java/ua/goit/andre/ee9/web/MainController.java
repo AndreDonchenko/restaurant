@@ -25,6 +25,7 @@ public class MainController {
     MenuService menuService;
     DishService dishService;
     EmployeeService employeeService;
+    IngredientService ingredientService;
 
     public void setEmployeeService(EmployeeService employeeService) {
         this.employeeService = employeeService;
@@ -34,9 +35,20 @@ public class MainController {
         this.ingredientService = ingredientService;
     }
 
-    IngredientService ingredientService;
+    public void setMenuService(MenuService menuService) {
+        this.menuService = menuService;
+    }
+
+    public void setDishService(DishService dishService) {
+        this.dishService = dishService;
+    }
 
     @RequestMapping(value ="/", method = RequestMethod.GET)
+    public String root() {
+        return "redirect:/main";
+    }
+
+    @RequestMapping(value ="/main", method = RequestMethod.GET)
     public ModelAndView index(String filter) {
         ModelAndView modelAndView = new ModelAndView("index");
         List<Menu> menuList = menuService.getAllMenus();
@@ -58,13 +70,13 @@ public class MainController {
         return modelAndView;
     }
 
-    @RequestMapping(value ="admin", method = RequestMethod.GET)
+    @RequestMapping(value ="/admin", method = RequestMethod.GET)
     public String adminIndex(Map<String, Object> model) {
         model.put("currentTime", new Date().toString());
         return "admin/index";
     }
 
-    @RequestMapping(value ="dish/{dishId}", method = RequestMethod.GET)
+    @RequestMapping(value ="/dish/{dishId}", method = RequestMethod.GET)
     public ModelAndView viewDish(@PathVariable(value = "dishId") Integer dishId) {
         ModelAndView modelAndView = new ModelAndView("viewDish");
         modelAndView.addObject(dishService.getDishById(dishId));
@@ -74,7 +86,7 @@ public class MainController {
         return modelAndView;
     }
 
-    @RequestMapping(value ="personel", method = RequestMethod.GET)
+    @RequestMapping(value ="/personel", method = RequestMethod.GET)
     public ModelAndView personel() {
         ModelAndView modelAndView = new ModelAndView("personel");
         List<Employee> employeeList = new ArrayList<>();
@@ -90,14 +102,6 @@ public class MainController {
         return modelAndView;
     }
 
-    public void setMenuService(MenuService menuService) {
-        this.menuService = menuService;
-    }
-
-    public void setDishService(DishService dishService) {
-        this.dishService = dishService;
-    }
-
     @RequestMapping(value ="map", method = RequestMethod.GET)
     public String showMap() {
         return "map";
@@ -107,5 +111,4 @@ public class MainController {
     public String showcontacts() {
         return "contacts";
     }
-
 }
