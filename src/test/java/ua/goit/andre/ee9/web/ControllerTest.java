@@ -290,11 +290,23 @@ public class ControllerTest {
         Assert.assertTrue(!dishList.contains(dish));
 
         //Delete CategoryDish
+        categoryController.positionsDelete(testCategoryDish, response); //remove test category
+        viewName = categoryController.positions(model);
+        categoryDishList = (ArrayList) model.get("dishCategories");
+        Assert.assertTrue(!categoryDishList.contains(categoryDish));
+
 
         //Delete Employee
+        employeeController.delEmployee(employee.getId(), request, response);
+        modelAndView = employeeController.employees();
+        employeeList = (ArrayList) modelAndView.getModel().get("employees");
+        Assert.assertTrue(!employeeList.contains(employee));
 
         //Delete Position
+        positionController.positionsDelete(position.getPositionName(), response);
+        positionController.positions(model);
+        positionList = (ArrayList) model.get("positions");
+        Assert.assertTrue(!positionList.contains(position));
     }
-
 }
 
