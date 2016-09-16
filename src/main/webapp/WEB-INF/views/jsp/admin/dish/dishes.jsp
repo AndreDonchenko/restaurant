@@ -58,7 +58,6 @@
     &emsp;
     <a href="${pageContext.request.contextPath}/admin/dish/categories">Category:</a>
     <form:select path="categoryDish">
-        <form:option value="NONE" label="--- Select ---" />
         <form:options items="${categoryList}" />
     </form:select>
     &emsp;
