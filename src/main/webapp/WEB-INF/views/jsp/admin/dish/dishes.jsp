@@ -35,7 +35,7 @@
         document.getElementById('photo').src = "${pageContext.request.contextPath}/resources/dish/" + document.getElementById('photoFn').value;
     }
 </script>
-<form:form action="/admin/dish" commandName="dish" method="post">
+<form:form action="${pageContext.request.contextPath}/admin/dish" commandName="dish" method="post">
     <input type="hidden" name="id" id="id" value=${dish.id}>
 
     <label for="dishName">Dish:</label>
