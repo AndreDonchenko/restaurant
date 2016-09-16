@@ -3,28 +3,19 @@ package ua.goit.andre.ee9.web;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.mock.web.MockHttpSession;
-import org.springframework.mock.web.MockServletContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 import ua.goit.andre.ee9.dao.HPreparedDishDao;
 import ua.goit.andre.ee9.model.*;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.sql.DataSource;
-import java.sql.*;
 import java.sql.Date;
 import java.util.*;
 
@@ -211,7 +202,7 @@ public class ControllerTest {
         Assert.assertTrue(recipeList.get(0).getIngredient().equals(ingredient));
 
         //Add Ingredient to Stock
-        stockController.addIngredient(ingredient.getIngredientName(), 100.0 ,response);
+        stockController.setIngredientQty(ingredient.getIngredientName(), 100.0 ,response);
         modelAndView = stockController.positions(ingredient.getIngredientName());
         List<Stock> stockList = (ArrayList) modelAndView.getModel().get("stockList");
         Assert.assertTrue(stockList.get(0).getIngredient().equals(ingredient));
@@ -260,16 +251,43 @@ public class ControllerTest {
         preparedDishDao.del(preparedDish);
 
         //Delete Dish from order
+        orderController.ordersDeleteDetail(order.getOrderDetails().get(0).getId());
+        modelAndView = orderController.orderMenu(employee.getName(), TEST_DATE, 1);
+        ordersList = (ArrayList) modelAndView.getModel().get("ordersList");
+        order = ordersList.get(0);
+        Assert.assertTrue(order.getOrderDetails().size()==0);
+        int ordersListSize = ordersList.size();
 
         //Delete Order
+        orderController.ordersDel(order.getId(), response);
+        modelAndView = orderController.orderMenu(employee.getName(), TEST_DATE, 1);
+        ordersList = (ArrayList) modelAndView.getModel().get("ordersList");
+        Assert.assertTrue(ordersList.size() == ordersListSize - 1);
+
+        //Delete ingredient from Recipe Dish
+        modelAndView = dishController.editDish(dish.getId(), request, response);
+        recipeList = (ArrayList) modelAndView.getModel().get("recipeList");
+        dishController.delRecipe(recipeList.get(0).getId());
+        Assert.assertTrue(recipeList.get(0).getIngredient().equals(ingredient));
 
         //Set Ingredient=0 and delete Ingredient from Stock
-
-        //Delete Ingredient from Stock
+        stockController.setIngredientQty(testIngredientName, 0.0 ,response);
+        stockController.delIngredient(testIngredientName,response);
+        modelAndView = stockController.positions(ingredient.getIngredientName());
+        stockList = (ArrayList) modelAndView.getModel().get("stockList");
+        Assert.assertTrue(stockList.size() == 0);
 
         //Delete Ingredient
+        ingredientController.positionsDelete(testIngredientName, response);
+        modelAndView = ingredientController.positions();
+        ordersList = (ArrayList) modelAndView.getModel().get("ingredients");
+        Assert.assertTrue(!ordersList.contains(ingredient));
 
         //Delete Dish
+        dishController.delDish(dish.getId(), response);
+        modelAndView = dishController.dishes(request, response);
+        dishList = (ArrayList) modelAndView.getModel().get("dishes");
+        Assert.assertTrue(!dishList.contains(dish));
 
         //Delete CategoryDish
 

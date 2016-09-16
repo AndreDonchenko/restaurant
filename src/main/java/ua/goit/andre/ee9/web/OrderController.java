@@ -72,7 +72,7 @@ public class OrderController {
 
     @RequestMapping(value = "admin/orders/delete/{orderId}", method = RequestMethod.GET)
     public void ordersDel(@PathVariable (value = "orderId") Integer orderId,
-                                  HttpServletRequest request, HttpServletResponse response ) {
+                          HttpServletResponse response ) {
         try {
             orderService.delOrder(orderService.getOrderById(orderId));
         } catch (Exception e) {

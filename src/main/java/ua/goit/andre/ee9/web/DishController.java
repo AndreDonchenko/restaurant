@@ -86,7 +86,7 @@ public class DishController {
 
     @RequestMapping(value = "admin/dish/delete/{dishId}", method = RequestMethod.GET)
     public void delDish(@PathVariable(value = "dishId") Integer dishId,
-                        HttpServletRequest request, HttpServletResponse response) {
+                        HttpServletResponse response) {
         try {
             dishService.delDish(dishService.getDishById(dishId));
         } catch (Exception e) {
