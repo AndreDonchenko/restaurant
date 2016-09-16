@@ -32,7 +32,7 @@ public class IngredientController {
 
     @RequestMapping(value = "admin/dish/ingredient/delete/{ingredientName}", method = RequestMethod.GET)
     public void positionsDelete(@PathVariable(value = "ingredientName") String ingredientName,
-                                HttpServletRequest request, HttpServletResponse response ) {
+                                HttpServletResponse response ) {
         try {
             Ingredient ingredient = ingredientService.getByName(ingredientName);
             ingredientService.del(ingredient);

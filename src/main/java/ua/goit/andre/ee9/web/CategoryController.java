@@ -44,7 +44,7 @@ public class CategoryController {
 
     @RequestMapping(value = "admin/dish/categories/delete/{categoryName}", method = RequestMethod.GET)
     public void positionsDelete(@PathVariable(value = "categoryName") String categoryName,
-                                  HttpServletRequest request, HttpServletResponse response) {
+                                HttpServletResponse response) {
         try {
             CategoryDish categoryDish = new CategoryDish(categoryName);
             dishService.delCategoryDish(categoryDish);

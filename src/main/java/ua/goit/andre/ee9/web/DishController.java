@@ -28,7 +28,7 @@ public class DishController {
 
     @RequestMapping(value = "admin/dish/edit/addIngredient", method = RequestMethod.POST)
     public void addIngredientToDish(Integer dishId, String ingredientName, Integer qty,
-                                      HttpServletRequest request, HttpServletResponse response) {
+                                      HttpServletResponse response) {
         boolean badRequest=false;
         List<Recipe> recipeList = dishService.getRecipeByDish(dishService.getDishById(dishId));
         for (Recipe r: recipeList) {
@@ -77,8 +77,6 @@ public class DishController {
         return modelAndView;
     }
 
-
-
     @RequestMapping(value = "admin/dish/add", method = RequestMethod.GET)
     public ModelAndView addDish() {
         ModelAndView modelAndView = new ModelAndView("admin/dish/editDish", "dish", new Dish());
@@ -98,7 +96,7 @@ public class DishController {
 
     @RequestMapping(value = "admin/dish/prepareDish", method = RequestMethod.POST)
     public void prepareDish(Integer dishId, Integer employeeId, Integer orderId, Date dateOrder,
-                              HttpServletRequest request, HttpServletResponse response) {
+                              HttpServletResponse response) {
         try {
             //Date date = Date.valueOf(dateOrder);
             dishService.PrepareDish(dishId, employeeId, orderId, dateOrder);

@@ -32,4 +32,20 @@ public class Ingredient {
     public String toString() {
         return ingredientName;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ingredient)) return false;
+
+        Ingredient that = (Ingredient) o;
+
+        return getIngredientName() != null ? getIngredientName().equals(that.getIngredientName()) : that.getIngredientName() == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return getIngredientName() != null ? getIngredientName().hashCode() : 0;
+    }
 }

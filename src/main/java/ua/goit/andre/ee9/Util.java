@@ -12,6 +12,9 @@ public class Util {
 
     public static List<String> getFilenames(String path) {
         List<String> result = new ArrayList();
+        if (path==null) {
+            return result;
+        }
         File dir = new File(path);
         if (dir.isDirectory()) {
             FileFilter fileFilter = new FileFilter() {

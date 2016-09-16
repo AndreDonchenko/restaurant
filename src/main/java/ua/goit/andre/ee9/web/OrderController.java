@@ -60,10 +60,6 @@ public class OrderController {
                 }
             }
         }
-
-        if (null != filterEmployee && filterEmployee != "")  {
-        }
-
         modelAndView.addObject("ordersList", ordersList);
         modelAndView.addObject("newOrder", new OrderNum());
         Map<Integer, String> employeeList = new HashMap<>();
@@ -93,11 +89,9 @@ public class OrderController {
         modelAndView.addObject("orderNum", orderNum);
         Map<Integer, String> employeeList = new HashMap<>();
         for (Employee e: employeeService.getAllEmployees()) {
-
             if (e.getPosition().getPositionName().equals("Coocker")) {
                 employeeList.put(e.getId(), e.getName() + " " + e.getSurname());
             }
-
             //employeeList.put(e.getId(), e.getName() + " " + e.getSurname());
         }
         modelAndView.addObject("coockerList", employeeList);

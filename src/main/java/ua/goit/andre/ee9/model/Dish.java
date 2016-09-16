@@ -43,8 +43,6 @@ public class Dish {
     @Column(name = "photo_fn")
     private String photoFn;
 
-
-
     @Override
     public String toString() {
         return dishName;

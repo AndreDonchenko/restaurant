@@ -32,4 +32,20 @@ public class CategoryDish {
     public String toString() {
         return categoryName;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CategoryDish)) return false;
+
+        CategoryDish that = (CategoryDish) o;
+
+        return getCategoryName() != null ? getCategoryName().equals(that.getCategoryName()) : that.getCategoryName() == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return getCategoryName() != null ? getCategoryName().hashCode() : 0;
+    }
 }

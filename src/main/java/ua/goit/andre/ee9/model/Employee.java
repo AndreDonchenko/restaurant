@@ -72,12 +72,38 @@ public class Employee {
         return name + " " + surname;
     }
 
-    /*
-        @Override
-        public String toString() {
-            return name + " " + surname;
-        }
-    */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee)) return false;
+
+        Employee employee = (Employee) o;
+
+        if (getId() != employee.getId()) return false;
+        if (Double.compare(employee.getSalary(), getSalary()) != 0) return false;
+        if (getName() != null ? !getName().equals(employee.getName()) : employee.getName() != null) return false;
+        if (getSurname() != null ? !getSurname().equals(employee.getSurname()) : employee.getSurname() != null)
+            return false;
+        if (getBirthDay() != null ? !getBirthDay().equals(employee.getBirthDay()) : employee.getBirthDay() != null)
+            return false;
+        return getPhone() != null ? getPhone().equals(employee.getPhone()) : employee.getPhone() == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = getId();
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getSurname() != null ? getSurname().hashCode() : 0);
+        result = 31 * result + (getBirthDay() != null ? getBirthDay().hashCode() : 0);
+        result = 31 * result + (getPhone() != null ? getPhone().hashCode() : 0);
+        temp = Double.doubleToLongBits(getSalary());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
+
     public void setSalary(double salary) {
         this.salary = salary;
     }
