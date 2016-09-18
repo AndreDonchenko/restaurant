@@ -27,7 +27,7 @@ public class DishController {
     IngredientService ingredientService;
 
     @RequestMapping(value = "admin/dish/edit/addIngredient", method = RequestMethod.POST)
-    public void addIngredientToDish(Integer dishId, String ingredientName, Integer qty,
+    public void addIngredientToDish(Integer dishId, String ingredientName, double qty,
                                       HttpServletResponse response) {
         boolean badRequest=false;
         List<Recipe> recipeList = dishService.getRecipeByDish(dishService.getDishById(dishId));
