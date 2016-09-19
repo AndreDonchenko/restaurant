@@ -20,12 +20,12 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @RequestMapping(value = "admin/employees", method = RequestMethod.GET)
-    public ModelAndView employees() {
+    public ModelAndView getEmployees() {
         return new ModelAndView("admin/Employee/employees", "employees", employeeService.getAllEmployees());
     }
 
     @RequestMapping(value = "admin/employees", method = RequestMethod.POST)
-    public String employeeUpdate(Employee employee) {
+    public String updateEmployee(Employee employee) {
         employeeService.save(employee);
         return "redirect:/admin/employees";
     }

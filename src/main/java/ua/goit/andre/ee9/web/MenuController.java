@@ -24,19 +24,19 @@ public class MenuController {
     DishService dishService;
 
     @RequestMapping(value = "admin/menu", method = RequestMethod.GET)
-    public String menus(Map<String, Object> model) {
+    public String getMenus(Map<String, Object> model) {
         model.put("menu", menuService.getAllMenus());
         return "admin/menu/menu";
     }
 
     @RequestMapping(value = "admin/menu", method = RequestMethod.POST)
-    public String menus(Menu menu) {
+    public String addMenu(Menu menu) {
         menuService.addMenu(menu);
         return "redirect:menu";
     }
 
     @RequestMapping(value = "admin/menu/update", method = RequestMethod.POST)
-    public String menuUpdate(Integer menuId, String menuName) {
+    public String updateMenu(Integer menuId, String menuName) {
         Menu menu = menuService.getMenuById(menuId);
         menu.setMenuName(menuName);
         menuService.addMenu(menu);
@@ -49,7 +49,7 @@ public class MenuController {
         List<Dish> dishes = menu.getDishes();
         dishes.add(dishService.getDishById(dishId));
         menu.setDishes(dishes);
-        menuService.saveMenu(menu);
+        menuService.addMenu(menu);
     }
 
     @RequestMapping(value = "admin/menu/delDish", method = RequestMethod.POST)
@@ -58,7 +58,7 @@ public class MenuController {
         List<Dish> dishes = menu.getDishes();
         dishes.remove(dishService.getDishById(dishId));
         menu.setDishes(dishes);
-        menuService.saveMenu(menu);
+        menuService.addMenu(menu);
     }
 
     @RequestMapping(value = "admin/menu/delete/{menuId}", method = RequestMethod.GET)

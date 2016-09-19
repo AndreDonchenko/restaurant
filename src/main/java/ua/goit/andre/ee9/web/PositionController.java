@@ -20,19 +20,19 @@ public class PositionController {
     private EmployeeService employeeService;
 
     @RequestMapping(value = "admin/positions", method = RequestMethod.GET)
-    public String positions(Map<String, Object> model) {
+    public String getPositions(Map<String, Object> model) {
         model.put("positions", employeeService.getAllPositions());
         return "admin/Employee/positions";
     }
 
     @RequestMapping(value = "admin/positions", method = RequestMethod.POST)
-    public String positions(Position position) {
+    public String addPosition(Position position) {
         employeeService.addPosition(position);
         return "redirect:/admin/positions";
     }
 
     @RequestMapping(value = "admin/positions/delete/{positionName}", method = RequestMethod.GET)
-    public void positionsDelete(@PathVariable(value = "positionName") String positionName,
+    public void delPosition(@PathVariable(value = "positionName") String positionName,
                                 HttpServletResponse response) {
         try {
             Position position = new Position(positionName);

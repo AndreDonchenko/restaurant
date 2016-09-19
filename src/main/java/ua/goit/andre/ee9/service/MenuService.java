@@ -24,10 +24,6 @@ public class MenuService {
         menuDao.del(menu);
     }
 
-    public void saveMenu(Menu menu) {
-        menuDao.add(menu);
-    }
-
     public Menu getMenuById(Integer id) {
         return menuDao.getById(id);
     }

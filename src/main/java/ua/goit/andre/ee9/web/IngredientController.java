@@ -21,7 +21,7 @@ public class IngredientController {
     private IngredientService ingredientService;
 
     @RequestMapping(value = "admin/dish/ingredient", method = RequestMethod.GET)
-    public ModelAndView positions() {
+    public ModelAndView getIngredients() {
         return new ModelAndView("admin/dish/ingredient", "ingredients", ingredientService.getAll());
     }
 
@@ -31,7 +31,7 @@ public class IngredientController {
     }
 
     @RequestMapping(value = "admin/dish/ingredient/delete/{ingredientName}", method = RequestMethod.GET)
-    public void positionsDelete(@PathVariable(value = "ingredientName") String ingredientName,
+    public void delIngredient(@PathVariable(value = "ingredientName") String ingredientName,
                                 HttpServletResponse response ) {
         try {
             Ingredient ingredient = ingredientService.getByName(ingredientName);

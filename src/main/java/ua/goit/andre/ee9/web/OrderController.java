@@ -39,7 +39,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "admin/orders", method = RequestMethod.GET)
-    public ModelAndView orderMenu(String filterEmployee, String filterDate, Integer filterTable) {
+    public ModelAndView getOrders(String filterEmployee, String filterDate, Integer filterTable) {
         ModelAndView modelAndView = new ModelAndView("admin/orders/orders");
         List<OrderNum> ordersList= orderService.getAllOrders();
         for (Iterator<OrderNum> orderNumIterator = ordersList.iterator(); orderNumIterator.hasNext();) {
@@ -71,7 +71,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "admin/orders/delete/{orderId}", method = RequestMethod.GET)
-    public void ordersDel(@PathVariable (value = "orderId") Integer orderId,
+    public void delOrder(@PathVariable (value = "orderId") Integer orderId,
                           HttpServletResponse response ) {
         try {
             orderService.delOrder(orderService.getOrderById(orderId));

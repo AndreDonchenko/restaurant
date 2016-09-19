@@ -31,19 +31,19 @@ public class CategoryController {
     DishService dishService;
 
     @RequestMapping(value = "admin/dish/categories", method = RequestMethod.GET)
-    public String positions(Map<String, Object> model) {
+    public String getCategories(Map<String, Object> model) {
         model.put("dishCategories", dishService.getAllCategories());
         return "/admin/dish/categories";
     }
 
     @RequestMapping(value = "admin/dish/categories", method = RequestMethod.POST)
-    public String positions(CategoryDish categoryDish) {
+    public String addCategory(CategoryDish categoryDish) {
         dishService.addCategoryDish(categoryDish);
         return "redirect:/admin/dish/categories";
     }
 
     @RequestMapping(value = "admin/dish/categories/delete/{categoryName}", method = RequestMethod.GET)
-    public void positionsDelete(@PathVariable(value = "categoryName") String categoryName,
+    public void delCategory(@PathVariable(value = "categoryName") String categoryName,
                                 HttpServletResponse response) {
         try {
             CategoryDish categoryDish = new CategoryDish(categoryName);

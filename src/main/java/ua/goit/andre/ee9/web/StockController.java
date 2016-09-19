@@ -32,7 +32,7 @@ public class StockController {
     }
 
     @RequestMapping(value = "admin/stock", method = RequestMethod.GET)
-    public ModelAndView positions(String filter) {
+    public ModelAndView getStock(String filter) {
         ModelAndView modelAndView = new ModelAndView("/admin/stock/stock");
         List<Stock> stockList= stockService.getAll();
         if (null != filter) {

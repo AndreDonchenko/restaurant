@@ -48,7 +48,7 @@ public class DishController {
     }
 
     @RequestMapping(value = "admin/dish", method = RequestMethod.GET)
-    public ModelAndView dishes(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView getDishes(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView modelAndView = new ModelAndView("/admin/dish/dishes");
         modelAndView.addObject("dishes", dishService.getAllDishes());
         modelAndView.addObject("categoryList", dishService.getAllCategories());
@@ -59,7 +59,7 @@ public class DishController {
     }
 
     @RequestMapping(value = "admin/dish", method = RequestMethod.POST)
-    public String dishUpdate(Dish dish) {
+    public String updateDish(Dish dish) {
         dishService.saveDish(dish);
         return "redirect:/admin/dish";
     }
