@@ -372,46 +372,44 @@ public class ControllerTest {
     public void testFullScenario() throws Exception {
         Position position = createTestPosition();
         Employee employee = createTestEmployee(position);
+        Assert.assertFalse(delPosition(position).isOk()); //Can't delete Position with Employee
+
         CategoryDish categoryDish = createTestCategoryDish();
         Dish dish = createTestDish(categoryDish);
-        Ingredient ingredient = createTestIngredient();
-        Recipe recipe = addIngredientToDish(dish, ingredient, 10.0);
-        addIngredientToStock (ingredient, 100.0);
+        Assert.assertFalse(delCategoryDish(categoryDish).isOk()); //Can't delete category with Dish
+
         OrderNum order = createOrderWithDish(employee, dish);
 
-        TestResult result = prepareDish(dish, employee, order);
+        TestResult result = prepareDish(dish, employee, order); //Can't prepare dish without Recipe
+        Assert.assertTrue(result.getResponse().getStatus() == HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+        Assert.assertFalse(result.isOk());
+
+        Ingredient ingredient = createTestIngredient();
+        Recipe recipe = addIngredientToDish(dish, ingredient, 10.0);
+
+        result = prepareDish(dish, employee, order); //Can't prepare dish without Ingredients on Stock
+        Assert.assertTrue(result.getResponse().getStatus() == HttpServletResponse.SC_BAD_REQUEST);
+        Assert.assertFalse(result.isOk());
+
+        addIngredientToStock (ingredient, 100.0);
+        result = prepareDish(dish, employee, order);
+        Assert.assertTrue(result.getResponse().getStatus() == HttpServletResponse.SC_OK);
         Assert.assertTrue(result.isOk());
         PreparedDish preparedDish = (PreparedDish) result.getResult();
+
         //Check Stock
-        Assert.assertTrue(getStockBalance(ingredient) == 90);
+        Assert.assertTrue(getStockBalance(ingredient) == 90.0);
         //Delete preparedDish
         preparedDishDao.del(preparedDish);
 
-        result = delDishFromOrder(order, employee);
-        Assert.assertTrue(result.isOk());
-
-        result = delOrder(order, employee);
-        Assert.assertTrue(result.isOk());
-
-        result = delIngredientFromDish(dish);
-        Assert.assertTrue(result.isOk());
-
-        result = delIngredientFromStock(ingredient);
-        Assert.assertTrue(result.isOk());
-
-        result = delIngredient(ingredient);
-        Assert.assertTrue(result.isOk());
-
-        result = delDish(dish);
-        Assert.assertTrue(result.isOk());
-
-        result = delCategoryDish(categoryDish);
-        Assert.assertTrue(result.isOk());
-
-        result = delEmployee(employee);
-        Assert.assertTrue(result.isOk());
-
-        result = delPosition(position);
-        Assert.assertTrue(result.isOk());
+        Assert.assertTrue(delDishFromOrder(order, employee).isOk());
+        Assert.assertTrue(delOrder(order, employee).isOk());
+        Assert.assertTrue(delIngredientFromDish(dish).isOk());
+        Assert.assertTrue(delIngredientFromStock(ingredient).isOk());
+        Assert.assertTrue(delIngredient(ingredient).isOk());
+        Assert.assertTrue(delDish(dish).isOk());
+        Assert.assertTrue(delCategoryDish(categoryDish).isOk());
+        Assert.assertTrue(delEmployee(employee).isOk());
+        Assert.assertTrue(delPosition(position).isOk());
     }
 }
