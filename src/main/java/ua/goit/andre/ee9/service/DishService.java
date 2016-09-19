@@ -42,7 +42,6 @@ public class DishService {
         dishDao.del(dish);
     }
 
-
     public List <Dish> getDishesByCategoryName(CategoryDish categoryDish) {
         return dishDao.getAllByCategory(categoryDish);
     }

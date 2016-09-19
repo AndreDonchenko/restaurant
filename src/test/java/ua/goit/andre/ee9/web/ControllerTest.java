@@ -252,7 +252,7 @@ public class ControllerTest {
 
 
     //Prepare Dish
-    private PreparedDish prepareDish(Dish dish, Employee employee, OrderNum order) {
+    private TestResult prepareDish(Dish dish, Employee employee, OrderNum order) {
         MockHttpServletResponse response = new MockHttpServletResponse();
         dishController.prepareDish(dish.getId(), employee.getId(), order.getId(), Date.valueOf(TEST_DATE), response);
         ModelAndView modelAndView = orderController.ordersEditDetail(order.getId());
@@ -267,12 +267,7 @@ public class ControllerTest {
                 break;
             }
         }
-        Assert.assertTrue(preparedDish.getDish().equals(dish));
-        Assert.assertTrue(preparedDish.getEmployee().equals(employee));
-        Assert.assertTrue(preparedDish.getOrder().equals(order));
-        Assert.assertTrue(preparedDish.getDish().equals(dish));
-        Assert.assertTrue(preparedDish.getPrepareDate().toString().equals(TEST_DATE));
-        return preparedDish;
+        return new TestResult((preparedDish != null), response, preparedDish);
     }
 
     private double getStockBalance(Ingredient ingredient) {
@@ -282,97 +277,95 @@ public class ControllerTest {
     }
 
     //Delete Dish from order
-    private void delDishFromOrder(OrderNum order, Employee employee) {
+    private TestResult delDishFromOrder(OrderNum order, Employee employee) {
         orderController.ordersDeleteDetail(order.getOrderDetails().get(0).getId());
         ModelAndView modelAndView = orderController.getOrders(employee.getName(), TEST_DATE, 1);
         List<OrderNum> ordersList = (ArrayList) modelAndView.getModel().get("ordersList");
         order = ordersList.get(0);
-        Assert.assertTrue(order.getOrderDetails().size()==0);
-
+        return new TestResult((order.getOrderDetails().size()==0), null, null);
     }
 
     //Delete Order
-    private void delOrder(OrderNum order, Employee employee) {
+    private TestResult delOrder(OrderNum order, Employee employee) {
         ModelAndView modelAndView = orderController.getOrders(employee.getName(), TEST_DATE, 1);
         List<OrderNum> ordersList = (ArrayList) modelAndView.getModel().get("ordersList");
         int ordersListSize = ordersList.size();
-        HttpServletResponse response = new MockHttpServletResponse();
+        MockHttpServletResponse response = new MockHttpServletResponse();
         orderController.delOrder(order.getId(), response);
         modelAndView = orderController.getOrders(employee.getName(), TEST_DATE, 1);
         ordersList = (ArrayList) modelAndView.getModel().get("ordersList");
-        Assert.assertTrue(ordersList.size() == ordersListSize - 1);
+        return new TestResult((ordersList.size() == ordersListSize - 1), response, null);
     }
 
     //Delete ingredient from Recipe Dish
-    private void delIngredientFromDish(Dish dish) {
-        HttpServletResponse response = new MockHttpServletResponse();
-        HttpServletRequest request = new MockHttpServletRequest();
+    private TestResult delIngredientFromDish(Dish dish) {
+        MockHttpServletResponse response = new MockHttpServletResponse();
+        MockHttpServletRequest request = new MockHttpServletRequest();
         ModelAndView modelAndView = dishController.editDish(dish.getId(), request, response);
         List<Recipe> recipeList = (ArrayList) modelAndView.getModel().get("recipeList");
         dishController.delRecipe(recipeList.get(0).getId());
         modelAndView = dishController.editDish(dish.getId(), request, response);
         recipeList = (ArrayList) modelAndView.getModel().get("recipeList");
-        Assert.assertTrue(recipeList.size() == 0);
+        return new TestResult((recipeList.size() == 0), response, null);
     }
 
     //Set Ingredient=0 and delete Ingredient from Stock
-    private void delIngredientFromStock(Ingredient ingredient) {
-        HttpServletResponse response = new MockHttpServletResponse();
+    private TestResult delIngredientFromStock(Ingredient ingredient) {
+        MockHttpServletResponse response = new MockHttpServletResponse();
         stockController.setIngredientQty(ingredient.getIngredientName(), 0.0 ,response);
         stockController.delIngredient(ingredient.getIngredientName(), response);
         ModelAndView modelAndView = stockController.getStock(ingredient.getIngredientName());
         List<Stock> stockList = (ArrayList) modelAndView.getModel().get("stockList");
-        Assert.assertTrue(stockList.size() == 0);
+        return new TestResult((stockList.size() == 0), response, null);
     }
 
     //Delete Ingredient
-    private void delIngredient(Ingredient ingredient) {
-        HttpServletResponse response = new MockHttpServletResponse();
+    private TestResult delIngredient(Ingredient ingredient) {
+        MockHttpServletResponse response = new MockHttpServletResponse();
         ingredientController.delIngredient(ingredient.getIngredientName(), response);
         ModelAndView modelAndView = ingredientController.getIngredients();
         List<Ingredient> ingredientList = (ArrayList) modelAndView.getModel().get("ingredients");
-        Assert.assertTrue(!ingredientList.contains(ingredient));
+        return new TestResult((!ingredientList.contains(ingredient)), response, null);
     }
 
     //Delete Dish
-    private void delDish(Dish dish) {
+    private TestResult delDish(Dish dish) {
         MockHttpServletResponse response = new MockHttpServletResponse();
         MockHttpServletRequest request = new MockHttpServletRequest();
         dishController.delDish(dish.getId(), response);
         ModelAndView modelAndView = dishController.getDishes(request, response);
         List <Dish> dishList = (ArrayList) modelAndView.getModel().get("dishes");
-        Assert.assertTrue(!dishList.contains(dish));
+        return new TestResult((!dishList.contains(dish)), response, null);
     }
 
     //Delete CategoryDish
-    private void delCategoryDish(CategoryDish categoryDish) {
-        HttpServletResponse response = new MockHttpServletResponse();
+    private TestResult delCategoryDish(CategoryDish categoryDish) {
+        MockHttpServletResponse response = new MockHttpServletResponse();
         categoryController.delCategory(categoryDish.getCategoryName(), response); //remove test category
         Map<String, Object> model = new HashMap();
         categoryController.getCategories(model);
         List <CategoryDish> categoryDishList = (ArrayList) model.get("dishCategories");
-        Assert.assertTrue(!categoryDishList.contains(categoryDish));
+        return new TestResult((!categoryDishList.contains(categoryDish)), response, null);
     }
 
-
     //Delete Employee
-    private void delEmployee(Employee employee) {
+    private TestResult delEmployee(Employee employee) {
         MockHttpServletResponse response = new MockHttpServletResponse();
         MockHttpServletRequest request = new MockHttpServletRequest();
         employeeController.delEmployee(employee.getId(), request, response);
         ModelAndView modelAndView = employeeController.getEmployees();
         List <Employee> employeeList = (ArrayList) modelAndView.getModel().get("employees");
-        Assert.assertTrue(!employeeList.contains(employee));
+        return new TestResult((!employeeList.contains(employee)), response, null);
     }
 
     //Delete Position
-    private void delPosition (Position position) {
+    private TestResult delPosition (Position position) {
         MockHttpServletResponse response = new MockHttpServletResponse();
         positionController.delPosition(position.getPositionName(), response);
         Map<String, Object> model = new HashMap();
         positionController.getPositions(model);
         List <Position> positionList = (ArrayList) model.get("positions");
-        Assert.assertTrue(!positionList.contains(position));
+        return  new TestResult((!positionList.contains(position)), response, null);
     }
 
     @Test
@@ -385,22 +378,40 @@ public class ControllerTest {
         Recipe recipe = addIngredientToDish(dish, ingredient, 10.0);
         addIngredientToStock (ingredient, 100.0);
         OrderNum order = createOrderWithDish(employee, dish);
-        PreparedDish preparedDish = prepareDish(dish, employee, order);
 
+        TestResult result = prepareDish(dish, employee, order);
+        Assert.assertTrue(result.isOk());
+        PreparedDish preparedDish = (PreparedDish) result.getResult();
         //Check Stock
         Assert.assertTrue(getStockBalance(ingredient) == 90);
         //Delete preparedDish
         preparedDishDao.del(preparedDish);
 
-        delDishFromOrder(order, employee);
-        delOrder(order, employee);
-        delIngredientFromDish(dish);
-        delIngredientFromStock(ingredient);
-        delIngredient(ingredient);
-        delDish(dish);
-        delCategoryDish(categoryDish);
-        delEmployee(employee);
-        delPosition(position);
+        result = delDishFromOrder(order, employee);
+        Assert.assertTrue(result.isOk());
+
+        result = delOrder(order, employee);
+        Assert.assertTrue(result.isOk());
+
+        result = delIngredientFromDish(dish);
+        Assert.assertTrue(result.isOk());
+
+        result = delIngredientFromStock(ingredient);
+        Assert.assertTrue(result.isOk());
+
+        result = delIngredient(ingredient);
+        Assert.assertTrue(result.isOk());
+
+        result = delDish(dish);
+        Assert.assertTrue(result.isOk());
+
+        result = delCategoryDish(categoryDish);
+        Assert.assertTrue(result.isOk());
+
+        result = delEmployee(employee);
+        Assert.assertTrue(result.isOk());
+
+        result = delPosition(position);
+        Assert.assertTrue(result.isOk());
     }
 }
-
