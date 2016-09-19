@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Andre on 12.06.2016.
  */
-public class HOrderDao extends Dao<OrderNum> {
+public class HOrderDao extends Dao<OrderNum, Integer> {
 
     @Override
     @Transactional

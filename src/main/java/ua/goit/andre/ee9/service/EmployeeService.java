@@ -41,10 +41,6 @@ public class EmployeeService {
         }
     }
 
-    public Position getPositionById(Integer id) {
-        return positionDao.getById(id);
-    }
-
     public List<Position> getAllPositions() {
         return positionDao.getAll();
     }

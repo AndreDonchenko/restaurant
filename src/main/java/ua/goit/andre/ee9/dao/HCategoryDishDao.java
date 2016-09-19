@@ -10,11 +10,11 @@ import java.util.List;
 /**
  * Created by Andre on 06.06.2016.
  */
-public class HCategoryDishDao extends Dao<CategoryDish> {
+public class HCategoryDishDao extends Dao<CategoryDish, String> {
 
     @Override
     @Transactional
-    public CategoryDish getById(Integer id) {
+    public CategoryDish getById(String id) {
         return sessionFactory.getCurrentSession().load(CategoryDish.class, id);
     }
 

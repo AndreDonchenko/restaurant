@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by Andre on 06.06.2016.
  */
-public class HStockDao extends Dao<Stock> {
+public class HStockDao extends Dao<Stock, Integer> {
 
     HIngredientDao ingredientDao;
     HRecipeDao recipeDao;

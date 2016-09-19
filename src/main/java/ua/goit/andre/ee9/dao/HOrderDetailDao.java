@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Andre on 12.06.2016.
  */
-public class HOrderDetailDao extends Dao<OrderDetail> {
+public class HOrderDetailDao extends Dao<OrderDetail, Integer> {
 
     @Override
     @Transactional

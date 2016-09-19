@@ -5,13 +5,14 @@ import org.hibernate.query.Query;
 import org.springframework.transaction.annotation.Transactional;
 import ua.goit.andre.ee9.model.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.Date;
 import java.util.List;
 
 /**
  * Created by Andre on 06.06.2016.
  */
-public class HPreparedDishDao extends Dao<PreparedDish> {
+public class HPreparedDishDao extends Dao<PreparedDish, Integer> {
 
     HRecipeDao recipeDao;
     HStockDao stockDao;

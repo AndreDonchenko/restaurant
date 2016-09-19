@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Andre on 06.06.2016.
  */
 
-public abstract class Dao <E>{
+public abstract class Dao <E, K>{
 
     protected SessionFactory sessionFactory;
 
@@ -18,7 +18,7 @@ public abstract class Dao <E>{
         sessionFactory.getCurrentSession().saveOrUpdate(entity);
     }
 
-    public abstract E getById(Integer id);
+    public abstract E getById(K id);
 
     public List<E> getByName(String name) {
         return null;

@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Andre on 03.09.2016.
  */
-public class HRecipeDao extends Dao<Recipe> {
+public class HRecipeDao extends Dao<Recipe, Integer> {
     @Override
     @Transactional
     public Recipe getById(Integer id) {

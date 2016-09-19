@@ -11,11 +11,11 @@ import java.util.List;
 /**
  * Created by Andre on 06.06.2016.
  */
-public class HIngredientDao extends Dao<Ingredient> {
+public class HIngredientDao extends Dao<Ingredient, String> {
 
     @Override
     @Transactional
-    public Ingredient getById(Integer id) {
+    public Ingredient getById(String id) {
         return sessionFactory.getCurrentSession().get(Ingredient.class, id);
     }
 

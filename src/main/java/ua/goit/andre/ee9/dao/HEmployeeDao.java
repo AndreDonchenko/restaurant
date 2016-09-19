@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Andre on 06.06.2016.
  */
-public class HEmployeeDao extends Dao<Employee> {
+public class HEmployeeDao extends Dao<Employee, Integer> {
 
     @Override
     @Transactional

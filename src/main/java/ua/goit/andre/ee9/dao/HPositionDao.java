@@ -10,11 +10,11 @@ import java.util.List;
 /**
  * Created by Andre on 06.06.2016.
  */
-public class HPositionDao extends Dao<Position> {
+public class HPositionDao extends Dao<Position, String> {
 
     @Override
     @Transactional
-    public Position getById(Integer id) {
+    public Position getById(String id) {
         return sessionFactory.getCurrentSession().get(Position.class, id);
     }
 

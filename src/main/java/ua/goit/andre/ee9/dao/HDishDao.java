@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Andre on 06.06.2016.
  */
-public class HDishDao extends Dao<Dish> {
+public class HDishDao extends Dao<Dish, Integer> {
 
     @Override
     @Transactional
